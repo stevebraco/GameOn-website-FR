@@ -1,23 +1,21 @@
-
-
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const form = document.querySelector('form')
-const modalClose = document.querySelectorAll('.close')
+const form = document.querySelector("form");
+const modalClose = document.querySelectorAll(".close");
 // const inputTypeText = document.querySelectorAll("input[type='text']")
-const firstName = document.getElementById('first');
-const lastName = document.getElementById('last');
-const email = document.getElementById('email');
-const birthdate = document.getElementById('birthdate');
-const participateTournament = document.getElementById('quantity');
-const cities = document.getElementsByName('location')
-const termsConditions = document.getElementById('checkbox1')
-const registration = document.querySelector('.validation')
-const modalRegistrationClose = document.querySelector('.btn-close')
-const iconNav = document.querySelector('.icon')
-const inputs = document.querySelectorAll('.text-control')
+const firstName = document.getElementById("first");
+const lastName = document.getElementById("last");
+const email = document.getElementById("email");
+const birthdate = document.getElementById("birthdate");
+const participateTournament = document.getElementById("quantity");
+const cities = document.getElementsByName("location");
+const termsConditions = document.getElementById("checkbox1");
+const registration = document.querySelector(".validation");
+const modalRegistrationClose = document.querySelector(".btn-close");
+const iconNav = document.querySelector(".icon");
+const inputs = document.querySelectorAll(".text-control");
 
 // reponsive nav
 const editNav = () => {
@@ -27,12 +25,12 @@ const editNav = () => {
   } else {
     x.className = "topnav";
   }
-}
+};
 
 // launch modal form
 const launchModal = () => {
   modalbg.style.display = "block";
-}
+};
 
 // close modal
 const closeModal = () => {
@@ -40,34 +38,40 @@ const closeModal = () => {
   modalbg.style.display = "none";
   // Modal thanks
   registration.style.display = "none";
-}
+};
 
 // Display error
 const showError = (input, message) => {
   // active data-set from div.formData
-  input.parentElement.dataset.error = message
-  input.parentElement.dataset.errorVisible = true
-}
+  input.parentElement.dataset.error = message;
+  input.parentElement.dataset.errorVisible = true;
+};
 
 // Remove error
 const removeError = (input) => {
-  input.parentElement.removeAttribute('data-error')
-  input.parentElement.dataset.errorVisible = false
-}
+  input.parentElement.removeAttribute("data-error");
+  input.parentElement.dataset.errorVisible = false;
+};
 
 const checkFirstNameLength = () => {
-    if(firstName.value.length >= 2) removeError(firstName)
-    else {
-     showError(firstName, `Veuillez entrer 2 caractères ou plus pour le champ du ${firstName.labels[0].innerHTML}.`)
-    }
-}
+  if (firstName.value.length >= 2) removeError(firstName);
+  else {
+    showError(
+      firstName,
+      `Veuillez entrer 2 caractères ou plus pour le champ du ${firstName.labels[0].innerHTML}.`
+    );
+  }
+};
 
 const checkLastNameLength = () => {
-  if(lastName.value.length >= 2) removeError(lastName)
+  if (lastName.value.length >= 2) removeError(lastName);
   else {
-   showError(lastName, `Veuillez entrer 2 caractères ou plus pour le champ du ${lastName.labels[0].innerHTML}.`)
+    showError(
+      lastName,
+      `Veuillez entrer 2 caractères ou plus pour le champ du ${lastName.labels[0].innerHTML}.`
+    );
   }
-}
+};
 
 // // check length text
 // const checkLength = () => {
@@ -81,118 +85,122 @@ const checkLastNameLength = () => {
 
 // check email
 const checkEmail = () => {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   // if the regex is false show error
-  if (!re.test(email.value.trim())) showError(email, 'Email n\' est pas valide');
-   else {
-    removeError(email)  
+  if (!re.test(email.value.trim())) showError(email, "Email n' est pas valide");
+  else {
+    removeError(email);
   }
-}
+};
 
 // check birthDate
 const checkBirthDate = () => {
   // if birthdate.valueAsDate is null, show error
-  if(!birthdate.valueAsDate) showError(birthdate, 'Vous devez entrer votre date de naissance.')
+  if (!birthdate.valueAsDate)
+    showError(birthdate, "Vous devez entrer votre date de naissance.");
   else {
-    removeError(birthdate)
+    removeError(birthdate);
   }
-}
+};
 
 // check quantity tournament
 const checkQuantity = () => {
   // value positive
-  if(participateTournament.value < 0 || participateTournament.value === '') showError(participateTournament, 'Une valeur positive doit être entré')
-   else {
-    removeError(participateTournament)
+  if (participateTournament.value < 0 || participateTournament.value === "")
+    showError(participateTournament, "Une valeur positive doit être entré");
+  else {
+    removeError(participateTournament);
   }
-}
+};
 
 // check cityChecked
 const checkCityChecked = () => {
-  let isChecked = false
+  let isChecked = false;
 
-  cities.forEach(city => {
-  // if a city is checked
-   if(city.checked) {
-     isChecked = true
-   } 
-})
-if(!isChecked) {
+  cities.forEach((city) => {
+    // if a city is checked
+    if (city.checked) {
+      isChecked = true;
+    }
+  });
+  if (!isChecked) {
     // if isChecked = false, show error
-    cities.forEach(city => showError(city, 'Vous devez choisir une option'))
+    cities.forEach((city) => showError(city, "Vous devez choisir une option"));
   } else {
-    cities.forEach(city => removeError(city))
+    cities.forEach((city) => removeError(city));
   }
-  return isChecked
-}
+  return isChecked;
+};
 
 const checkTermsAndConditions = () => {
   // if not checked show error
-  if(!termsConditions.checked) {
-    showError(termsConditions, 'Vous devez vérifier que vous acceptez les termes et conditions.')
+  if (!termsConditions.checked) {
+    showError(
+      termsConditions,
+      "Vous devez vérifier que vous acceptez les termes et conditions."
+    );
   } else {
-    removeError(termsConditions)
+    removeError(termsConditions);
   }
-}
+};
 
 // verification input on focus out
 const checkSwitchInput = (input) => {
   switch (input.id) {
-    case 'first':
-      checkFirstNameLength()
+    case "first":
+      checkFirstNameLength();
       break;
-    case 'last':
-      checkLastNameLength()
+    case "last":
+      checkLastNameLength();
       break;
-    case 'email':
-      checkEmail()
+    case "email":
+      checkEmail();
       break;
-    case 'birthdate':
-      checkBirthDate()
+    case "birthdate":
+      checkBirthDate();
       break;
-    case 'quantity':
-      checkQuantity()
+    case "quantity":
+      checkQuantity();
       break;
 
     default:
-      console.log('not found this input');
+      console.log("not found this input");
       break;
   }
-}
+};
 
 // check number error
 const validationForm = () => {
-  let error = 0
+  let error = 0;
 
-  formData.forEach(fData => {
-    if(fData.dataset.error) {
-      error += 1
+  formData.forEach((fData) => {
+    if (fData.dataset.error) {
+      error += 1;
     } else {
-      error -= 0
+      error -= 0;
     }
-  })
+  });
 
   // if 0 error, form accepted
-  if(!error) {
-    console.log('form accepted');
-    
+  if (!error) {
+    console.log("form accepted");
+
     // close the modal
     modalbg.style.display = "none";
+
     // launch modal thanks
     registration.style.display = "block";
 
     // init form
-    inputs.forEach(input => input.value = '')
-    cities.forEach(city => {
-      city.checked = false
-     })
-
+    inputs.forEach((input) => (input.value = ""));
+    cities.forEach((city) => {
+      city.checked = false;
+    });
   } else {
-    console.log('error');
+    console.log("error");
   }
-}
-
-
+};
 
 // check error focusOut
 // firstName.addEventListener('focusout', checkFirstNameLength)
@@ -203,34 +211,33 @@ const validationForm = () => {
 
 // EVENT
 // event check error on focus out
-inputs.forEach(input =>  input.addEventListener('focusout', () => {
-  checkSwitchInput(input)
-}))
+inputs.forEach((input) =>
+  input.addEventListener("focusout", () => {
+    checkSwitchInput(input);
+  })
+);
 
 // event editNav
-iconNav.addEventListener('click', editNav);
+iconNav.addEventListener("click", editNav);
 
 // event close modal
 modalClose.forEach((close) => close.addEventListener("click", closeModal));
 
 // event close validation thanks
-modalRegistrationClose.addEventListener('click', closeModal);
+modalRegistrationClose.addEventListener("click", closeModal);
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-
 // on submit
-form.addEventListener('submit', (e) => {
-  e.preventDefault()
-  checkFirstNameLength()
-  checkLastNameLength()
-  checkEmail()
-  checkBirthDate()
-  checkQuantity()
-  checkCityChecked()
-  checkTermsAndConditions()
-
-  validationForm()
-  
-})
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  checkFirstNameLength();
+  checkLastNameLength();
+  checkEmail();
+  checkBirthDate();
+  checkQuantity();
+  checkCityChecked();
+  checkTermsAndConditions();
+  validationForm();
+});
