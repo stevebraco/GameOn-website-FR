@@ -6,7 +6,9 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const form = document.querySelector('form')
 const modalClose = document.querySelectorAll('.close')
-const inputTypeText = document.querySelectorAll("input[type='text']")
+// const inputTypeText = document.querySelectorAll("input[type='text']")
+const firstName = document.getElementById('first');
+const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const birthdate = document.getElementById('birthdate');
 const participateTournament = document.getElementById('quantity');
@@ -16,9 +18,6 @@ const registration = document.querySelector('.validation')
 const modalRegistrationClose = document.querySelector('.btn-close')
 const iconNav = document.querySelector('.icon')
 const inputs = document.querySelectorAll('.text-control')
-
-const firstName = document.getElementById('first');
-const lastName = document.getElementById('last');
 
 // reponsive nav
 const editNav = () => {
@@ -37,13 +36,15 @@ const launchModal = () => {
 
 // close modal
 const closeModal = () => {
+  // Modal form
   modalbg.style.display = "none";
+  // Modal thanks
   registration.style.display = "none";
 }
 
 // Display error
-// active data-set from div.formData
 const showError = (input, message) => {
+  // active data-set from div.formData
   input.parentElement.dataset.error = message
   input.parentElement.dataset.errorVisible = true
 }
@@ -81,6 +82,7 @@ const checkLastNameLength = () => {
 // check email
 const checkEmail = () => {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  // if the regex is false show error
   if (!re.test(email.value.trim())) showError(email, 'Email n\' est pas valide');
    else {
     removeError(email)  
@@ -115,8 +117,8 @@ const checkCityChecked = () => {
      isChecked = true
    } 
 })
-// if isChecked = false, show error
-  if(!isChecked) {
+if(!isChecked) {
+    // if isChecked = false, show error
     cities.forEach(city => showError(city, 'Vous devez choisir une option'))
   } else {
     cities.forEach(city => removeError(city))
@@ -125,42 +127,11 @@ const checkCityChecked = () => {
 }
 
 const checkTermsAndConditions = () => {
+  // if not checked show error
   if(!termsConditions.checked) {
     showError(termsConditions, 'Vous devez vérifier que vous acceptez les termes et conditions.')
   } else {
     removeError(termsConditions)
-  }
-}
-
-// check number error
-const validationForm = () => {
-  let error = 0
-
-  formData.forEach(fData => {
-    if(fData.dataset.error) {
-      error += 1
-    } else {
-      error -= 0
-    }
-  })
-
-  // if error is empty, form accepted
-  if(!error) {
-    console.log('form accepted');
-    
-    // init form
-    inputs.forEach(input => input.value = '')
-    cities.forEach(city => {
-      city.checked = false
-     })
-    
-    // close the modal
-    modalbg.style.display = "none";
-    // launch modal thanks
-    registration.style.display = "block";
-
-  } else {
-    console.log('error');
   }
 }
 
@@ -184,9 +155,44 @@ const checkSwitchInput = (input) => {
       break;
 
     default:
+      console.log('not found this input');
       break;
   }
 }
+
+// check number error
+const validationForm = () => {
+  let error = 0
+
+  formData.forEach(fData => {
+    if(fData.dataset.error) {
+      error += 1
+    } else {
+      error -= 0
+    }
+  })
+
+  // if 0 error, form accepted
+  if(!error) {
+    console.log('form accepted');
+    
+    // close the modal
+    modalbg.style.display = "none";
+    // launch modal thanks
+    registration.style.display = "block";
+
+    // init form
+    inputs.forEach(input => input.value = '')
+    cities.forEach(city => {
+      city.checked = false
+     })
+
+  } else {
+    console.log('error');
+  }
+}
+
+
 
 // check error focusOut
 // firstName.addEventListener('focusout', checkFirstNameLength)
@@ -202,13 +208,13 @@ inputs.forEach(input =>  input.addEventListener('focusout', () => {
 }))
 
 // event editNav
-iconNav.addEventListener('click', editNav)
+iconNav.addEventListener('click', editNav);
 
 // event close modal
 modalClose.forEach((close) => close.addEventListener("click", closeModal));
 
 // event close validation thanks
-modalRegistrationClose.addEventListener('click', closeModal)
+modalRegistrationClose.addEventListener('click', closeModal);
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));

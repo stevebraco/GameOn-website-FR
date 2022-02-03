@@ -552,15 +552,13 @@ footer {
   }
 
   .hero-content {
-    min-width: initial;
+    min-width: 450px;
   }
 
   .bground {
     top: 100px;
   }
 }
-
-
 
  @media screen and (max-width: 540px) {
    .topnav {
