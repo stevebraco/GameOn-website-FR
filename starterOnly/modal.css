@@ -33,7 +33,7 @@ img {
 }
 
 .topnav {
-  position: relative; 
+  position: relative;
   overflow: hidden;
   margin: 2rem 2%;
   display: flex;
@@ -91,8 +91,6 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -138,7 +136,7 @@ main {
 }
 
 .bground {
-  display: none; 
+  display: none;
   position: fixed;
   z-index: 10;
   left: 0;
@@ -190,11 +188,10 @@ input {
 }
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: .625rem;
+  font-size: 0.625rem;
   color: #e54858;
   display: block;
-  margin-top: 7px;
-  margin-bottom: 7px;
+  margin: 10px 0;
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
@@ -465,8 +462,7 @@ footer {
     display: block;
     box-shadow: unset;
     max-height: initial;
-    min-height: 93vh; 
-
+    min-height: 93vh;
   }
   .hero-content {
     background: #fff;
@@ -518,14 +514,16 @@ footer {
     display: initial;
     padding: 30px;
   }
-  .topnav a {display: none;}
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     display: block;
     color: #ff0000;
     font-size: 1.5rem;
-     position: absolute;
+    position: absolute;
     right: 30px;
-    top: 10px;  
+    top: 10px;
   }
 
   .topnav a.icon:hover {
@@ -535,11 +533,12 @@ footer {
   .hero-section {
     margin-top: 6rem;
   }
-
 }
 
 @media screen and (max-width: 1000px) {
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {
+    position: relative;
+  }
   .topnav.responsive .icon {
     position: absolute;
     right: 30px;
@@ -560,11 +559,13 @@ footer {
   }
 }
 
- @media screen and (max-width: 540px) {
-   .topnav {
+@media screen and (max-width: 540px) {
+  .topnav {
     padding: 20px 30px 0px;
-   }
-  .topnav a {display: none;}
+  }
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     display: block;
     margin-top: -15px;
@@ -582,7 +583,7 @@ footer {
   }
 
   .hero-text {
-    font-size: .81rem;
+    font-size: 0.81rem;
   }
 
   .hero-content {
@@ -601,7 +602,7 @@ footer {
   .content {
     max-width: initial;
   }
-} 
+}
 
 @keyframes modalopen {
   from {

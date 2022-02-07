@@ -4,18 +4,26 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const form = document.querySelector("form");
 const modalClose = document.querySelectorAll(".close");
-// const inputTypeText = document.querySelectorAll("input[type='text']")
+// Inputs text
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
 const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const participateTournament = document.getElementById("quantity");
+const inputs = document.querySelectorAll(".text-control");
+
+// Input radio
 const cities = document.getElementsByName("location");
+
+// Input checkbox
 const termsConditions = document.getElementById("checkbox1");
 const registration = document.querySelector(".validation");
-const modalRegistrationClose = document.querySelector(".btn-close");
+
+// button modal close registration
+const btnCloseRegistrationModal = document.querySelector(".btn-close");
+
+// button menu responsive
 const iconNav = document.querySelector(".icon");
-const inputs = document.querySelectorAll(".text-control");
 
 // reponsive nav
 const editNav = () => {
@@ -73,16 +81,6 @@ const checkLastNameLength = () => {
   }
 };
 
-// // check length text
-// const checkLength = () => {
-//   inputTypeText.forEach(input => {
-//     if(input.value.length >= 2) removeError(input)
-//     else {
-//      showError(input, `Veuillez entrer 2 caractères ou plus pour le champ du ${input.parentElement.innerText}.`)
-//     }
-//   })
-// }
-
 // check email
 const checkEmail = () => {
   const re =
@@ -96,8 +94,9 @@ const checkEmail = () => {
 
 // check birthDate
 const checkBirthDate = () => {
+  let yearLength = birthdate.value.split("-")[0].length;
   // if birthdate.valueAsDate is null, show error
-  if (!birthdate.valueAsDate)
+  if (!birthdate.valueAsDate || yearLength > 4)
     showError(birthdate, "Vous devez entrer votre date de naissance.");
   else {
     removeError(birthdate);
@@ -163,7 +162,6 @@ const checkSwitchInput = (input) => {
     case "quantity":
       checkQuantity();
       break;
-
     default:
       console.log("not found this input");
       break;
@@ -202,21 +200,6 @@ const validationForm = () => {
   }
 };
 
-// check error focusOut
-// firstName.addEventListener('focusout', checkFirstNameLength)
-// lastName.addEventListener('focusout', checkLastNameLength)
-// email.addEventListener('focusout', checkEmail)
-// birthdate.addEventListener('focusout', checkBirthDate)
-// participateTournament.addEventListener('focusout', checkQuantity)
-
-// EVENT
-// event check error on focus out
-inputs.forEach((input) =>
-  input.addEventListener("focusout", () => {
-    checkSwitchInput(input);
-  })
-);
-
 // event editNav
 iconNav.addEventListener("click", editNav);
 
@@ -224,10 +207,17 @@ iconNav.addEventListener("click", editNav);
 modalClose.forEach((close) => close.addEventListener("click", closeModal));
 
 // event close validation thanks
-modalRegistrationClose.addEventListener("click", closeModal);
+btnCloseRegistrationModal.addEventListener("click", closeModal);
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+// event check error on focus out
+inputs.forEach((input) =>
+  input.addEventListener("focusout", () => {
+    checkSwitchInput(input);
+  })
+);
 
 // on submit
 form.addEventListener("submit", (e) => {
