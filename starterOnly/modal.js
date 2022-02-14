@@ -106,7 +106,11 @@ const checkBirthDate = () => {
 // check quantity tournament
 const checkQuantity = () => {
   // value positive
-  if (participateTournament.value < 0 || participateTournament.value === "")
+  if (
+    participateTournament.value < 0 ||
+    participateTournament.value === "" ||
+    isNaN(participateTournament.value)
+  )
     showError(participateTournament, "Une valeur positive doit être entré");
   else {
     removeError(participateTournament);
