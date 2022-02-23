@@ -94,9 +94,11 @@ const checkEmail = () => {
 
 // check birthDate
 const checkBirthDate = () => {
-  let yearLength = birthdate.value.split("-")[0].length;
+  let year = birthdate.value.split("-")[0];
+  let isAdult = new Date().getFullYear() - 18 < year;
+
   // if birthdate.valueAsDate is null, show error
-  if (!birthdate.valueAsDate || yearLength > 4)
+  if (!birthdate.valueAsDate || year.length > 4 || isAdult)
     showError(birthdate, "Vous devez entrer votre date de naissance.");
   else {
     removeError(birthdate);
@@ -204,6 +206,20 @@ const validationForm = () => {
   }
 };
 
+// Value numeric only
+participateTournament.addEventListener("keypress", function (evt) {
+  console.log(evt);
+  if (
+    evt.key === "e" ||
+    evt.key === "." ||
+    evt.key === "-" ||
+    evt.key === "+" ||
+    evt.key === ","
+  ) {
+    evt.preventDefault();
+  }
+});
+
 // event editNav
 iconNav.addEventListener("click", editNav);
 
@@ -220,6 +236,13 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 inputs.forEach((input) =>
   input.addEventListener("focusout", () => {
     checkSwitchInput(input);
+  })
+);
+
+// event check error on change
+cities.forEach((city) =>
+  city.addEventListener("change", () => {
+    checkCityChecked();
   })
 );
 
